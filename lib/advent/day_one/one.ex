@@ -1,17 +1,13 @@
 defmodule Advent.DayOne.One do
   def sum() do
-    case read_file() do
-      {:ok, stream} ->
-        stream
-        |> String.split("\n", trim: true)
-        |> Enum.reduce(0, &(String.to_integer(&1) + &2))
-
-      {:error, reason} ->
-        reason
-    end
+    file_input()
+    |> Enum.reduce(0, &(String.to_integer(&1) + &2))
   end
 
-  defp read_file(file_path \\ "#{__DIR__}/input.txt") do
-    File.read(Path.expand(file_path))
+  defp file_input(file_path \\ "#{__DIR__}/input.txt") do
+    file_path
+    |> Path.expand()
+    |> File.read!()
+    |> String.split("\n", trim: true)
   end
 end
