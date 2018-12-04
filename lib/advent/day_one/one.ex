@@ -3,8 +3,7 @@ defmodule Advent.DayOne.One do
     case read_file() do
       {:ok, stream} ->
         stream
-        |> String.trim()
-        |> String.split("\n")
+        |> String.split("\n", trim: true)
         |> Enum.reduce(0, &(String.to_integer(&1) + &2))
 
       {:error, reason} ->
