@@ -1,21 +1,24 @@
 defmodule Advent.DayOne.Two do
   def second_coming() do
-    [{freq, _}] =
-      file_stream()
-      |> Stream.map(&String.trim(&1, "\n"))
-      |> Stream.map(&String.to_integer(&1))
-      |> Stream.cycle()
-      |> Stream.scan({0, %{0 => 1}}, fn change, {freq, map} ->
-        new_freq = freq + change
-        {new_freq, Map.update(map, new_freq, 1, &(&1 + 1))}
-      end)
-      |> Stream.filter(fn {freq, map} -> Map.get(map, freq) == 2 end)
-      |> Enum.take(1)
+    file_input()
+    |> Stream.cycle()
+    |> Enum.reduce_while({0, MapSet.new()}, fn change, {freq, map} ->
+      new_freq = freq + String.to_integer(change)
 
-    freq
+      case MapSet.member?(map, new_freq) do
+        true ->
+          {:halt, new_freq}
+
+        _ ->
+          {:cont, {new_freq, MapSet.put(map, new_freq)}}
+      end
+    end)
   end
 
-  defp file_stream(file_path \\ "#{__DIR__}/input.txt") do
-    File.stream!(Path.expand(file_path))
+  defp file_input(file_path \\ "#{__DIR__}/input.txt") do
+    file_path
+    |> Path.expand()
+    |> File.read!()
+    |> String.split("\n", trim: true)
   end
 end
