@@ -2,7 +2,7 @@ defmodule Advent.DayOne.Two do
   def second_coming() do
     file_input()
     |> Stream.cycle()
-    |> Enum.reduce_while({0, MapSet.new()}, fn change, {freq, map} ->
+    |> Enum.reduce_while({0, MapSet.new([0])}, fn change, {freq, map} ->
       new_freq = freq + String.to_integer(change)
 
       case MapSet.member?(map, new_freq) do
