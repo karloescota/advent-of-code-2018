@@ -1,5 +1,5 @@
 defmodule Advent.DayOne.Two do
-  def second_coming do
+  def second_coming() do
     [{freq, _}] =
       file_stream()
       |> Stream.map(&String.trim(&1, "\n"))
