@@ -1,8 +1,8 @@
-defmodule Advent.Day1.One do
+defmodule Advent.DayOne.One do
   def sum() do
     case read_file() do
-      {:ok, file} ->
-        file
+      {:ok, stream} ->
+        stream
         |> String.trim()
         |> String.split("\n")
         |> Enum.reduce(0, &(String.to_integer(&1) + &2))
@@ -12,7 +12,7 @@ defmodule Advent.Day1.One do
     end
   end
 
-  defp read_file(file_path \\ "#{__DIR__}/d1_input.txt") do
+  defp read_file(file_path \\ "#{__DIR__}/one_input.txt") do
     File.read(Path.expand(file_path))
   end
 end
