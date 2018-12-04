@@ -12,7 +12,7 @@ defmodule Advent.DayOne.One do
     end
   end
 
-  defp read_file(file_path \\ "#{__DIR__}/one_input.txt") do
+  defp read_file(file_path \\ "#{__DIR__}/input.txt") do
     File.read(Path.expand(file_path))
   end
 end

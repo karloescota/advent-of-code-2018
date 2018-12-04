@@ -15,7 +15,7 @@ defmodule Advent.DayOne.Two do
     freq
   end
 
-  defp file_stream(file_path \\ "#{__DIR__}/one_input.txt") do
+  defp file_stream(file_path \\ "#{__DIR__}/input.txt") do
     File.stream!(Path.expand(file_path))
   end
 end
